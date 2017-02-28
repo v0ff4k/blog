@@ -1,0 +1,19 @@
+on some request  some  answers
+
+
+$prettyprint_lang = null;
+switch ($request->getRequestFormat()) {
+    case 'json':
+        $prettyprint_lang = 'js';
+        $content = json_encode(json_decode($response->getContent()), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+        break;
+    case 'xml':
+        $prettyprint_lang = 'xml';
+        $content = $response->getContent();
+        break;
+    default:
+        $content = $response->getContent();
+        break;
+}
+
+

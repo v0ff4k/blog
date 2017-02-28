@@ -1,0 +1,195 @@
+body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
+h1 { font-size: 36px; }
+h2 { font-size: 21px; margin-bottom: 1em; }
+p { margin: 0 0 1em 0; }
+a { color: #0000F0; }
+a:hover { text-decoration: none; }
+code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
+
+
+
+/************ blog: navbar  *****************/
+
+/***  blog logo ****/
+.letter-rtl{
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+    -o-transform:rotateY(180deg);
+    -ms-transform:rotateY(180deg);
+    transform: rotateY(180deg);
+    unicode-bidi:bidi-override;
+    direction:rtl;
+    display: block;
+    float: right;
+    width: 14px;
+    text-shadow: 1px 0 #933, -1px 0 #339;
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -ms-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+}
+
+.letter-rtl:hover{animation: g-in .5s 0 forwards;
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+.navbar-inverse {
+    border-radius: 0px;
+    background: #1d3a21;
+    background: -moz-linear-gradient(top, #1d3a21 0px, #102112 100%);
+    background: -webkit-linear-gradient(top, #1d3a21 0px,#102112 100%);
+    background: linear-gradient(to bottom, #1d3a21 0px,#102112 100%);
+    border-bottom-width: 0px;
+}
+
+
+/************ blog:  forms *****************/
+.form-group {
+    margin: 15px 0;
+}
+
+label {
+    display: inline-block;
+    font-weight: 700;
+    margin: 10px 0 5px 0;
+    max-width: 100%;
+}
+
+label.required::after{
+    color: maroon;
+    content: "*"; 
+    position: relative; top: -0.5em; font-size: 80%;
+    /*fallback vertical-align: super;font-size: smaller;  */
+}
+
+
+/************ blog:  login forms *****************/
+
+input#username, input#password {
+    float: left;
+    margin-bottom: 0;
+    position: relative;
+    width: 60%;
+    z-index: 2;
+}
+
+.loginglyph{
+    top: 0px;
+}
+
+.freespace-10{width: 10%;}
+.freespace-20{width: 20%;}
+.freespace-30{width: 30%;}
+.freespace-40{width: 40%;}
+.freespace-50{width: 50%;}
+.freespace-60{width: 60%;}
+
+
+
+
+/************ blog:  categories and post *****************/
+.row.media{margin: 15px;}
+
+
+.cat-list .cat{margin: 5px 3px; float: left;}
+
+.cat{
+    border: 1px solid gray;
+    border-radius: 0.25em;
+    display: inline;
+    padding: 0.3em 0.8em;
+    color: #333;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+    font-size: 0.8em;
+}
+
+
+/* custumisable tag lighter, must be darker on white BG */
+.table-container .media .title span, .cat-deff {/*for deff color*/
+    color: #333;
+}
+
+.table-container .media .title span.news, .cat-news {
+    color: #5cb85c;
+}
+.table-container .media .title span.php, .cat-php {
+    color: #f0ad4e;
+}
+.table-container .media .title span.html, .cat-html {
+    color: #d9534f;
+}
+.table-container .media .title span.others, .cat-others {
+    color: #333;
+}
+
+.table-filter .media-photo {
+    width: 80px;
+}
+.table-filter .media-body {
+    /* display: block; */
+}
+.table-filter .media-meta {
+    color: #999;
+    font-size: 11px;
+}
+.table-filter .media .title {
+    color: #2bbcde;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0;
+}
+.table-filter .media .title span {
+    font-size: 0.8em;
+    margin-right: 20px;
+}
+
+.table-container div.row.media div.media-body hr{ width: 95%; color: #777; }
+
+.media-body .btn {margin: 5px 8px;}
+
+
+/*** comments ***/
+.commentblock{max-height: 300px; overflow: auto;}
+.comm-user{font-weight: bold; display: block; clear: both; text-align: center;}
+.comm-date{display: block; text-align: center;}
+.comm-id{float: left; color: gray; padding: 5px; font-family: georgia; content: "#";}
+.comm-content{font-style: italic;}
+
+
+
+/*** categories ant othes  used with in ***/
+a .h-link, a:link .h-link, a:visited .h-link{color: transparent;}
+a:hover .h-link{color: inherit;}
+
+
+
+/*Extend admin left menu*/
+.sidebar-menu li > a > .fa-angle-left, .sidebar-menu li > a > .pull-right-container > .fa-angle-left {
+    height: auto;
+    margin-right: 10px;
+    margin-top: -15px;
+    padding: 0;
+    width: auto;
+}
+
+/*** responcive me NOOW !!! ***/
+
+@media (min-width: 768px) {
+
+    @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+    .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
+}   
+ @-webkit-keyframes 
+ g-in { 0% {text-shadow: 1px 0 #933, -1px 0 #339;} 50% {text-shadow: 5px 0 #933, -5px 0 #339;} 100% {text-shadow: 0;} }
+ @keyframes 
+ g-in { 0% {text-shadow: 1px 0 #933, -1px 0 #339;} 50% {text-shadow: 5px 0 #933, -5px 0 #339;} 100% {text-shadow: 0;} } 
