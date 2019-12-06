@@ -1,0 +1,89 @@
+#default use annotations
+app:
+    resource: 'blog/blog_routing.yml'
+    prefix:   /{_locale}/blog
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
+
+# Html homepage for intro
+homepage:
+    path: /{_locale}
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    AppBundle:default:homepage.html.twig
+        _locale:     '%locale%'
+
+api_blog:
+    resource: "@ApiBundle/Resources/config/blog/routing.yml"
+    type: rest
+    prefix: /{_locale}/api/blog
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
+
+api_security:
+    resource: "@ApiBundle/Resources/config/routing.yml"
+    type: rest
+    prefix: /{_locale}/api
+    defaults:
+        _locale: '%locale%'
+
+### login/logout
+security_login:
+    path: /{_locale}/login
+    defaults:
+        _controller: AppBundle:Security:login
+        _locale:     '%locale%'
+
+security_logout:
+    path: /{_locale}/logout
+    defaults:
+        _controller: AppBundle:Security:logout
+        _locale:     '%locale%'
+
+security_edit:
+    path: /{_locale}/useredit
+    defaults:
+        _controller: AppBundle:Security:edit
+        _locale:     '%locale%'
+
+security_register:
+    path: /{_locale}/register
+    defaults:
+        _controller: AppBundle:Security:register
+        _locale:     '%locale%'
+
+#rss
+blog_rss:
+    path: /{_locale}/blog/rss.xml
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Blog:index
+        _format: 'xml'
+        page: 1
+        _locale:     '%locale%'
+
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: AppBundle:Redirecting:trailingSlashRedirect }
+    requirements:
+        url: .*/$
+
+app_sonata:
+    # loads routes from the given routing file stored in some bundle
+    resource: 'packages/sonata_routing.yml'
+    prefix:   /{_locale}/admin
+    defaults:
+            _locale:     '%locale%'
+
+#api doc + API testing
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/api/doc
+    defaults:
+        _locale:     '%locale%' #already set  before prefix /api/

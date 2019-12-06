@@ -1,0 +1,25 @@
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+    <a class="btn btn-lg btn-block btn-info" href="{{ path('blog_post_create') }}">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i> {{ 'action.create_post'|trans }}
+    </a>
+
+{% else %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-lg btn-block btn-success btn-md" href="{{ path('security_register') }}">
+                <i class="fa fa-key" aria-hidden="true"></i> {{ 'title.register'|trans }}
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-lg btn-block btn-success btn-md" href="{{ path('security_login') }}">
+                <i class="fa fa-users" aria-hidden="true"></i> {{ 'help.login'|trans }}
+            </a>
+        </div>
+    </div>
+{% endif %}
+<hr/>
+{# date, time, null, TIMEZONE #}
+{# 'none', 'short', 'medium', 'long', 'full'#}
+&copy; {{ 'now'|localizeddate('long', 'short', null, 'Asia/Bishkek') }}

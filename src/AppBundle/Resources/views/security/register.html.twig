@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'register' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    {% if error is defined %}
+        <div class="alert alert-danger">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="well">
+                {{ form_start(form) }}
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.surname) }}
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.plainPassword.first) }}
+                    {{ form_row(form.plainPassword.second) }}
+                    <button class="btn btn-md btn-block btn-success" type="submit">
+                        <i class="fa fa-key" aria-hidden="true"></i>{{ 'title.register'|trans }}
+                    </button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+        <div id="register-help" class="col-md-7">
+            <h3>
+                <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                {{ 'help.registred_users'|trans }}
+            </h3>
+
+            {{ include('AppBundle:security:_user_table.html.twig') }}
+        </div>
+    </div>
+
+    {% if app.debug %}
+        {{ include('AppBundle:security:_dev_row_help.html.twig') }}
+    {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}

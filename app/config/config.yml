@@ -1,0 +1,114 @@
+# common options for every execution environment ('prod', 'dev', 'test').
+
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: listeners.yml }
+    - { resource: packages/sonata_admin.yml }
+    - { resource: "@ApiBundle/Resources/config/config.yml" }
+    - { resource: "@ApiBundle/Resources/config/services.yml" }
+
+framework:
+    # See https://symfony.com/doc/current/reference/configuration/framework.html#ide
+    ide: ~
+    csrf_protection: ~
+    esi:             { enabled: true }
+    translator:      { fallback: '%locale%' }
+    secret:          '%secret%'
+    router:
+        resource: '%kernel.project_dir%/app/config/routing.yml'
+        strict_requirements: ~
+    form:            ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  '%locale%'
+    trusted_hosts:   ~
+    session:
+        handler_id:  session.handler.native_file
+        save_path:   '%kernel.project_dir%/var/sessions/%kernel.environment%'
+    fragments:       ~
+    http_method_override: true
+    assets:
+        json_manifest_path: '%kernel.project_dir%/web/build/manifest.json' #dont forget to update!
+    php_errors:
+        log: true
+    cache:
+        prefix_seed: '%kernel.environment%'
+
+    # PHPStorm IDE integration for open files
+    #ide: 'phpstorm://open?file=%%f&amp;line=%%l'
+
+    serializer: true
+
+# Twig Configuration (used for rendering app templates)
+twig:
+    debug:            '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    form_themes:
+        - '@App/form/layout.html.twig'
+        - '@App/form/fields.html.twig'
+        - 'SonataCoreBundle:Form:datepicker.html.twig'
+    paths:
+            "%kernel.root_dir%/../src/AppBundle/Resources/views": ~
+            "%kernel.root_dir%/../src/AppBundle/Resources/TwigBundle/views": ~
+
+ornicar_gravatar: ~
+
+# Assetic compressor, simply minify css+js
+# when needs more, react/vue/jsModules  use Encore+Node.js  symfony.com/doc/3.4/frontend/encore/versus-assetic.html
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        scssphp:
+            formatter: 'Leafo\ScssPhp\Formatter\Compressed'
+        jsqueeze: ~
+
+# Doctrine Configuration (used to access databases and manipulate their information)
+doctrine:
+    dbal:
+        #url: '%env(DATABASE_URL)%'
+        connections:
+                default:
+                    driver:   '%database_driver%'
+                    host:     '%database_host%'
+                    port:     '%database_port%'
+                    dbname:   '%database_name%'
+                    user:     '%database_user%'
+                    password: '%database_password%'
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        auto_mapping: true
+        query_cache_driver: array
+        metadata_cache_driver: array
+        result_cache_driver: array
+        dql:
+            string_functions:
+                LIM: AppBundle\DBAL\LimFunction
+
+# Swiftmailer Configuration (used to send emails)
+swiftmailer:
+    #url : '%env(MAILER_URL)%'
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    port:      "%mailer_port%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+
+    #save to memory
+    #spool:     { type: memory }
+
+    #save to file, to view or send via console, portion
+    spool:
+        type: file
+        path: "%kernel.root_dir%/../web/bundles/spool"
+
+# doctrine auto generation config stof
+stof_doctrine_extensions:
+    default_locale: en
+    orm:
+        default:
+            sluggable : true
+            timestampable: true

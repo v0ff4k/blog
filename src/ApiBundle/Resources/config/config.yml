@@ -1,0 +1,54 @@
+
+nelmio_api_doc: ~
+
+jms_serializer:
+    handlers:
+        datetime:
+            default_format: "Y-m-dTH:i:s" # ISO8601
+            default_timezone: "Asia/Bishkek"
+
+fos_rest:
+    routing_loader:
+# all response will be in JSON
+        default_format: json
+# we dont need to return .EXT
+        include_format: false
+# done for JSON
+
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener:
+        enabled: true
+        rules:
+            - { path: '^/(%app_locales%)/api/*', priorities: ['json', 'jsonp'], fallback_format: json, prefer_extension: true }
+            - { path: '^/', priorities: [ 'html', '*/*'], fallback_format: html, prefer_extension: true }
+    versioning: false
+    view:
+        view_response_listener: 'force'
+        formats:
+            json: true
+            jsonp: true
+            html: true
+            xml: false
+            rss: false
+        failed_validation: HTTP_BAD_REQUEST # 400
+        empty_content: 204
+        serialize_null: false
+
+    serializer:
+        serialize_null: true
+    disable_csrf_role: ROLE_API
+
+#security:
+# only in app/config/security.yml !
+# HERE is not allowed to define new elements for path "security.firewalls"!
+#     firewalls.main.anonymous: ~
+#     firewalls.main.logout: ~
+#     firewalls.main.guard.authenticators: {ApiBundle\Security\TokenAuthenticator}
+
+#    api:
+#        pattern: ^/                                # Для всех других страниц
+#        #fos_oauth: true                            # включаем OAuth2
+#        stateless: true                            # Не использовать куки
+#        anonymous: false                           # Анонимный доступ запрещён
+

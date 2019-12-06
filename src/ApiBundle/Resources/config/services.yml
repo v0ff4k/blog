@@ -1,0 +1,37 @@
+services:
+#    api.example:
+#        class: ApiBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+#    ApiBundle\:
+#        resource: '../../../src/ApiBundle/*'
+#        exclude: '../../../src/ApiBundle/{Controller,Entity,Repository}'
+#
+#    ApiBundle\Controller\:
+#        resource: '../../../src/ApiBundle/Controller'
+#        public: true
+#        tags: ['controller.service_arguments']
+
+    api.service.security:
+        class: ApiBundle\Service\ApiService
+        public: true
+
+    api.service.blog:
+        class: ApiBundle\Service\ApiBlogService
+
+### register providers.token_user_provider
+    token_user_authenticator:
+        class: ApiBundle\Security\TokenAuthenticator
+        autowire: true
+
+# comment this for development purpose.
+#    api.exception_subscriber:
+#        class: ApiBundle\EventListener\ExceptionSubscriber
+#        arguments: []
+#        tags:
+#          - { name: kernel.event_subscriber }

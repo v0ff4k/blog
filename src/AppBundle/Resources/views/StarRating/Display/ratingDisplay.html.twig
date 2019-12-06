@@ -1,0 +1,5 @@
+<div class="rating">
+  {% for i in 1..max %}
+    <div class="fa {% if i <= stars %}fa-star{% else %}fa-star-empty{% endif %} {{ starSize }}"></div>
+  {% endfor %}
+</div>

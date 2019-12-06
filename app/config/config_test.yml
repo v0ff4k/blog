@@ -1,0 +1,35 @@
+imports:
+    - { resource: config_dev.yml }
+
+parameters:
+
+    #env(DATABASE_URL): 'sqlite:///%kernel.project_dir%/var/data/blog_test.sqlite'
+        connections:
+                default:
+                    driver:   '%database_driver%'
+                    host:     '%database_host%'
+                    port:     '%database_port%'
+                    dbname:   '%database_name%'
+                    user:     '%database_user%'
+                    password: '%database_password%'
+
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+    profiler:
+        collect: false
+
+web_profiler:
+    toolbar: false
+    intercept_redirects: false
+
+# swiftmailer:
+#     disable_delivery: true
+
+# this configuration simplifies testing URLs protected by the security mechanism
+# See https://symfony.com/doc/current/cookbook/testing/http_authentication.html
+security:
+    firewalls:
+        secured_area:
+            http_basic: ~

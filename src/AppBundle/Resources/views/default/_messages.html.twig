@@ -1,0 +1,17 @@
+<div class="messages">
+
+    {% for type, messages in app.flashes %}
+
+        {% for message in messages %}
+            <div class="transition-09 alert alert-dismissible alert-{{ type }}" role="alert" id="alert_{{ loop.index }}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                        onclick="document.getElementById('alert_{{ loop.index }}').display=none">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message|trans }}
+            </div>
+        {% endfor %}
+
+    {% endfor %}
+
+</div>

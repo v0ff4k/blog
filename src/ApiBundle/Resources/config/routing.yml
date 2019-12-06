@@ -1,0 +1,36 @@
+
+### REST popular methods with descr:
+#-GET.   post/{id} (200|404)  read/get  data
+#-POST.  post/{id}(/upd|)?   (201|404) insert data
+#-PUT.   post/{id}/(new|replace) (200|204|404)  update data
+#-DELETE.post/{id}/del  (200|202|404) Request that a resource be removed(or hide/trash e t.c.)
+##-PATCH...post/{id}/upd  (201|404) Update only the specified fields of an entity at a URI. ...
+
+### login/logout
+api_security_login:
+    type: rest
+    path: /login
+    methods: [GET, POST]
+    defaults:
+        _controller: ApiBundle:ApiSecurity:login
+
+api_security_logout:
+    type: rest
+    path: /logout
+    methods: [GET]
+    defaults:
+        _controller: ApiBundle:ApiSecurity:logout
+
+api_security_edit:
+    type: rest
+    path: /useredit
+    methods: [GET, PUT]
+    defaults:
+        _controller: ApiBundle:ApiSecurity:edit
+
+api_security_register:
+    type: rest
+    path: /register
+    methods: [GET, POST]
+    defaults:
+        _controller: ApiBundle:ApiSecurity:register

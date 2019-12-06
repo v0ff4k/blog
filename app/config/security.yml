@@ -1,0 +1,86 @@
+security:
+###
+    encoders:
+        AppBundle\Entity\User: bcrypt
+
+    role_hierarchy:
+        ROLE_USER:              [ROLE_USER] #default user  role.
+        ROLE_ADMIN:             [ROLE_ADMIN, ROLE_API]
+        ROLE_SUPER_ADMIN:       [ROLE_ADMIN, ROLE_SUPER_ADMIN]
+
+    providers:
+        database_users:
+            entity: { class: AppBundle:User }
+
+        token_user_provider:
+            entity: { class: AppBundle:User, property: token }
+
+###
+    firewalls:
+
+        dev:
+            pattern: ^/(_(profiler|wdt)|build|css|images|js)/
+            security: false
+
+        api:
+            pattern: ^/(%app_locales%)/api
+            anonymous: true
+            stateless: true
+            guard:
+                authenticators:
+                    - 'token_user_authenticator'
+#            provider: token_user_provider
+
+            form_login:
+                check_path: api_security_login
+                login_path: api_security_login
+                csrf_parameter: _csrf_token
+                csrf_token_id: apilogin
+                default_target_path:  api_index
+            logout:
+                path: api_security_logout
+                #success_handler: security.authentication.success.handler
+                target: api_index
+
+        secured_area:
+            pattern: ^/
+            anonymous: true
+#            logout_on_user_change: true
+
+            form_login:
+                check_path:           security_login
+                login_path:           security_login
+                csrf_token_generator: security.csrf.token_manager
+                #success_handler: security.authentication.success.handler
+                csrf_parameter: _csrf_token
+                csrf_token_id: authenticate
+                default_target_path:  blog_index
+            logout:
+                path: security_logout
+                #success_handler: security.authentication.success.handler
+                target: homepage
+
+        main:
+            anonymous: ~
+            logout: ~
+            access_denied_handler: AppBundle\Security\AccessDeniedHandler
+
+###
+    access_control:
+        - { path: ^/(%app_locales%)/blog/comment/.*/new, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/(%app_locales%)/blog/.*/.*/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/(%app_locales%)/blog/create, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/(%app_locales%)/useredit, roles: IS_AUTHENTICATED_FULLY }
+        - { path: '^/(%app_locales%)/admin/.*', roles: [ROLE_SUPER_ADMIN] }
+
+# disable simple admin for sonata part, only SUPER_ADMIN!
+#        - { path: ^/admin/, role: [ADMIN, SUPER_ADMIN] }
+#        - { path: ^/(%app_locales%)/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+# API alow for  ip or auth as minimum  ADMIN !
+        - { path: ^/(%app_locales%)/api, allow_if: "'127.0.0.1' == request.getClientIp() or '192.168.55.113' == request.getClientIp() or has_role('ROLE_API')"}
+#        - { path: ^/(%app_locales%)/api, roles: IS_AUTHENTICATED_ANONYMOUSLY, ips: [10.10.20.30, 192.168.0.1, 127.0.0.1, 127.2.0.1]  }
+#        - { path: ^/(%app_locales%)/api, roles: ROLE_NO_ACCESS }
+
+### Default access, ALL allowed!
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <form action="{{ path('blog_search') }}" method="get">
+        <div class="form-group">
+            <input name="q" type="text" class="form-control search-field"
+                   data-min-input-length="3"
+                   data-max-prewiew-items="{{ uHelper.numPerPage }}"
+                   data-prewiew-delay="500"
+                   data-noresult-text="{{ 'post.no_posts_found'|trans }}"
+                   placeholder="{{ 'post.search_for'|trans }}" autocomplete="off" autofocus>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('search') }}"/>
+        </div>
+    </form>
+    <div id="results" class="transition-09">
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}

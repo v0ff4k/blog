@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="keywords" content="{% block keywords %}keys, for blog, demo code{% endblock %}" />
+        <meta name="description" content="{% block description %}description for demo blog, code demo blog{% endblock %}" />
+        {# CSFR token for checking AJAX request #}
+        <meta content="authenticity_token" name="csrf-param" />
+        <meta content="{{ _csrf_ajax }}" name="csrf-token" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>{% block title %}Code demonstration{% endblock %}</title>
+
+        <link rel="alternate" type="application/rss+xml" title="{{ 'rss.title'|trans }}" href="{{ path('blog_rss') }}">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css"
+              integrity="sha256-c9OCpXgYepI8baar2x81YigAWryLIoQ2k0/7cCb1JAg=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <!--new but demo: link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css" /-->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+        {#<style type="text/css">#}
+            {#@font-face {#}
+                {#font-family: 'FontAwesome';#}
+                {#src: url('//fontawesome.com/v4.7.0/assets/font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0');#}
+                {#src: url('//fontawesome.com/v4.7.0/assets/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('//fontawesome.com/v4.7.0/assets/font-awesome//fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('//fontawesome.com/v4.7.0/assets/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('//fontawesome.com/v4.7.0/assets/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('//fontawesome.com/v4.7.0/assets/font-awesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');#}
+                {#font-weight: normal;#}
+                {#font-style: normal;#}
+            {#}#}
+        {#</style>#}
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}" />
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+
+    <body id="{% block body_id %}{% endblock %}">
+    {% set l = '127' == app.request.server.get("REMOTE_ADDR")|split('.')|first %}
+        {% block header %}
+            <header>
+                {{ include('AppBundle:default:_navbar.html.twig') }}
+            </header>
+        {% endblock %}
+
+        <div class="container body-container">
+            {% block body %}
+
+                <div class="row">
+                    <div id="main" class="col-sm-12">
+                        {{ include('AppBundle:default:_messages.html.twig') }}
+
+                        {% block main %}{% endblock %}
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div id="sidebar" class="col-sm-12">
+                        {% block sidebar %}
+                            {{ render_esi(controller('FrameworkBundle:Template:template', {
+                                'template': 'AppBundle:blog:_sidebar.html.twig',
+                                'sharedAge': 600,
+                                '_locale': app.request.locale
+                            })) }}
+                        {% endblock %}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+
+        {% block footer %}
+            <footer class="panel-footer font-small blue pt-4">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                            <ul class="list-unstyled list-inline social text-center">
+                                <li class="list-inline-item"><a href="{{ path('blog_rss') }}"><i class="fa fa-rss" aria-hidden="true"></i> RSS</a>&nbsp;&boxV;</li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i>Facebook</a>&nbsp;&boxV;</li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i>Twitter</a>&nbsp;&boxV;</li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i>Insta</a>&nbsp;&boxV;</li>
+                                <li class="list-group"><a href="#"><i class="fa fa-google-plus"></i>Google</a>&nbsp;&boxV;</li>
+                                <li class="list-group"><a href="#"><i class="fa fa-youtube"></i>YouTube</a>&nbsp;&boxV;</li>
+                                <li class="list-group"><a href="#" target="_blank"><i class="fa fa-envelope"></i>Feedback</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </footer>
+        {% endblock %}
+
+
+        {% block javascripts %}
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.umd.min.js" integrity="sha256-GYcdwXot2kSaBb8kr9o8zDKYBwQ1PCkugjcCYFQS+IA=" crossorigin="anonymous"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-dropdown/2.0.3/jquery.dropdown.min.js" integrity="sha256-WjSLNFIPnKGDcCD43ypegq+F+/M0WFws4KmtyOVsf0g=" crossorigin="anonymous"></script>
+            <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+            <script src="{{ asset('build/js/app.js') }}"></script>
+        {% endblock %}
+
+    </body>
+</html>

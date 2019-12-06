@@ -1,0 +1,49 @@
+
+api_index:
+    path:   /{page}
+    methods: [GET]
+    defaults:
+        _controller: ApiBundle:ApiBlog:index
+        page: 1
+    requirements:
+        page: \d+
+
+
+#-GET.   post/{id} (200|404)  read/get  data
+#-POST.  post/{id}/upd   (201|404) insert data
+#-PUT.   post/{id}/(new|Replace) (200|204|404)  update data
+#-DELETE.post/{id}/del  (200|202|404) Request that a resource be removed; however, the resource does not have to be removed immediately.
+##-PATCH...post/{id}/upd  (201|404) Update only the specified fields of an entity at a URI. ...
+
+api_post:
+    path: /post/{id}-{slug}
+    methods: [GET]
+    defaults:
+        _controller: ApiBundle:ApiBlog:show
+    requirements:
+        id: \d+
+        slug: ^[a-z0-9\-_]+
+
+api_post_id:
+    path: /post/{id}
+    methods: [GET]
+    defaults:
+        _controller: ApiBundle:ApiBlog:show
+        slug: ""
+    requirements:
+        id: \d+
+
+api_post_slug:
+    path: /post/{slug}
+    methods: [GET]
+    defaults:
+        _controller: ApiBundle:ApiBlog:show
+        id: 0
+    requirements:
+        slug: ^[a-z0-9\-_]+
+
+api_post_comments_paginated:
+    path:   /post-comments/{postId}/{page}
+    methods: [GET]
+    defaults: { _controller: ApiBundle:ApiBlog:indexPostComments, page: 1}
+    requirements: { postId: \d+, page: \d+ }

@@ -1,0 +1,86 @@
+### all sonata config+services+security(without security.access_control) goes here !
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+sonata_admin:
+    security:
+        handler: sonata.admin.security.handler.role
+
+        role_admin: ROLE_ADMIN
+        role_super_admin: ROLE_SUPER_ADMIN
+
+    title:      is,is,..aAdminka!
+    title_logo: /apple-touch-icon.png
+
+    templates:
+        list:                       '@SonataAdmin/CRUD/list.html.twig'
+        action:                     '@SonataAdmin/CRUD/action.html.twig'
+        select:                     '@SonataAdmin/CRUD/list__select.html.twig'
+        list_block:                 '@SonataAdmin/Block/block_admin_list.html.twig'
+        short_object_description:   '@SonataAdmin/Helper/short-object-description.html.twig'
+        batch:                      '@SonataAdmin/CRUD/list__batch.html.twig'
+        inner_list_row:             '@SonataAdmin/CRUD/list_inner_row.html.twig'
+        base_list_field:            '@SonataAdmin/CRUD/base_list_field.html.twig'
+        pager_links:                '@SonataAdmin/Pager/links.html.twig'
+        pager_results:              '@SonataAdmin/Pager/results.html.twig'
+        layout:  AppBundle:CRUD:sonata_admin_base_layout.html.twig
+        edit:   AppBundle:CRUD:base_edit.html.twig
+
+
+services:
+
+### admin functions ###
+    sonata.admin.user:
+        class: AppBundle\Admin\UserAdmin
+        arguments: [ ~, AppBundle\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Blog", label: Users, show_mosaic_button: false }
+
+    admin.post:
+        class: AppBundle\Admin\PostAdmin
+        arguments: [ ~, AppBundle\Entity\Post, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Blog", label: Posts, show_mosaic_button: false }
+
+    admin.comment:
+        class: AppBundle\Admin\CommentAdmin
+        arguments: [ ~, AppBundle\Entity\Comment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Blog", label: Comments, show_mosaic_button: false }
+
+
+
+security:
+
+    role_hierarchy:
+
+        ROLE_ADMIN_USER_READER:
+            - ROLE_ADMIN_USER_LIST
+            - ROLE_ADMIN_COMMENT_LIST
+            - ROLE_ADMIN_POST_LIST
+        ROLE_ADMIN_USER_EDITOR:
+            - ROLE_ADMIN_USER_CREATE
+            - ROLE_ADMIN_USER_EDIT
+            - ROLE_ADMIN_COMMENT_CREATE
+            - ROLE_ADMIN_COMMENT_EDIT
+            - ROLE_ADMIN_POST_CREATE
+            - ROLE_ADMIN_POST_EDIT
+        ROLE_ADMIN_SUPER_ADMIN:
+            - ROLE_ADMIN_USER_ALL
+            - ROLE_ADMIN_COMMENT_ALL
+            - ROLE_ADMIN_POST_ALL
+
+
+        ROLE_USER:        [USER]
+        #keep in mind, role without permission to VIEW  (.*/admin.*) part!
+        ROLE_ADMIN:       [USER, ROLE_ADMIN_USER_READER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ADMIN_SUPER_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    access_decision_manager:
+        strategy: unanimous

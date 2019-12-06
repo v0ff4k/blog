@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'homepage' %}
+
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>{{ 'title.homepage'|trans|raw }}</h1>
+    </div>
+
+    <div class="row card-deck mb-2">
+
+        <div class="col-md-6 entrance mb-2">
+            <h4>{{ 'help.browse_app'|trans|raw }}</h4>
+            <hr noshade />
+            <a class="btn btn-primary btn-md" href="{{ path('blog_index') }}">
+                <i class="fa fa-folder-open" aria-hidden="true"></i> {{ 'action.browse_app'|trans }}
+            </a>
+
+        </div>
+
+        <div class="col-md-6  auth mb-2">{#  {{ l or is_granted('ROLE_SUPER_ADMIN')?'6':'12' }}  #}
+                {% if app.user is not null %}
+                    <h4>
+                        <i class="fa fa-user" aria-hidden="true"></i>{{ app.user.name }} {{ app.user.surname|first }}.({{ app.user.email|hideEmail }}) &nbsp;
+                    </h4>
+                    <hr noshade />
+                    <a class="btn btn-info btn-md" href="{{ path('security_logout') }}">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i> {{ 'menu.logout'|trans }}
+                    </a>
+                {% else %}
+                    <h4>{{ 'help.auth'|trans|raw }} &nbsp;</h4>
+                    <hr noshade />
+                    <a class="btn btn-success btn-md" href="{{ path('security_login') }}">
+                        <i class="fa fa-users" aria-hidden="true"></i> {{ 'help.login'|trans }}
+                    </a>
+                {% endif %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a class="btn btn-primary btn-md" href="{{ path('sonata_admin_dashboard') }}">
+                        <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.browse_admin'|trans }}
+                    </a>
+                {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 jumbotron">
+
+            {#<a class="btn btn-default btn-md" href="{{ path('api_index') }}">#}
+            {#<i class="fa fa-code" aria-hidden="true"></i> {{ 'action.browse_api'|trans }}#}
+            {#</a>#}
+            <span><i class="fa fa-language"></i>
+                {% set route_param = app.request.get('_route_params', []) %}
+                {% set route_index = app.request.get('_route', 'homepage') %}
+
+                {% for locale in locales() %}
+                    {% if app.request.locale != locale.code %}
+                        | <a href="{{ path(route_index, route_param |merge({_locale: locale.code})) }}">{{ locale.code }}</a>
+                    {% endif %}
+                {% endfor %}
+            </span>
+            &nbsp;/&nbsp;
+            <a class="btn btn-default btn-md" href="{{ path('api_index') }}">
+                <i class="fa fa-code" aria-hidden="true"></i> {{ 'action.browse_api'|trans }}
+            </a>
+            &nbsp;/&nbsp;
+            <a class="btn btn-default btn-md" href="{{ path('nelmio_api_doc_index') }}">
+                <i class="fa fa-code" aria-hidden="true"></i> {{ 'action.browse_api'|trans }} DOC
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+    {% if l or is_granted('ROLE_SUPER_ADMIN') %}
+        {% if uHelper.dev %}
+            Hi DEV !!!
+        {% else %}
+            prodMode
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

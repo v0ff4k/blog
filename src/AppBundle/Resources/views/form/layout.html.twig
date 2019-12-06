@@ -1,0 +1,17 @@
+{% extends 'form/bootstrap_3_layout.html.twig' %}
+{# lil copy from @Twig\Resources\views\Form\* for beauty form extension #}
+
+{# Errors: and dont forget about space trimers. ex: remove space on left side "{{-" "{%-"   #}
+{% block form_errors -%}
+    {% if errors|length > 0 -%}
+
+        {{ form.parent ? '<span class="help-block">' : '<div class="alert alert-danger">' }}
+        <ul class="list-unstyled">
+            {%- for error in errors -%}
+                <li><span class="fa fa-exclamation-triangle"></span> {{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+        {{ form.parent ? '</span>' : '</div>' }}
+
+    {%- endif %}
+{%- endblock form_errors %}

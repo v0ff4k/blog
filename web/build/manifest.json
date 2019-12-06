@@ -1,0 +1,9 @@
+{
+  "build/css/admin.css": "/build/css/admin.css",
+  "build/css/app.css": "/build/css/app.css",
+  "build/js/admin.js": "/build/js/admin.js",
+  "build/js/app.js": "/build/js/app.js",
+  "build/js/common.js": "/build/js/common.js",
+  "build/js/search.js": "/build/js/search.js",
+  "build/manifest.js": "/build/manifest.js"
+}

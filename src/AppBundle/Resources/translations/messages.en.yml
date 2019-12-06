@@ -1,0 +1,126 @@
+note: NOTE
+tip: TIP
+not_available: Not available
+http_error:
+  name: Error %status_code%
+  description: There was an unknown error (HTTP %status_code%) that prevented to complete your request.
+  suggestion: Try loading this page again in some minutes or <a href="%url%">go back to the homepage</a>.
+http_error_403:
+  description: You don't have correct permissions.
+  suggestion: Ask your manager or system administrator to grant you access to this resource.
+http_error_404:
+  description: We couldn't find the page you requested.
+  suggestion: Check out any misspelling in the URL or <a href="%url%">go back to the homepage</a>.
+http_error_500:
+  description: There was an internal server error.
+  suggestion: Try loading this page again in some minutes or <a href="%url%">go back to the homepage</a>.
+title:
+  homepage: Welcome to the <strong>Demo CODE BLOG</strong> app
+  source_code: Source code used to render this page
+  controller_code: Controller code
+  twig_template_code: Twig template code
+  login: Secure Sign in
+  post_list: Post List
+  edit_post: 'Edit post %var%'
+  add_comment: Add a comment
+  comment_error: There was an error publishing your comment
+  post_new: Post creation
+  register: Register
+action:
+  show: Show
+  show_post: Show post
+  edit: Edit
+  edit_post: Edit post
+  save: Save changes
+  delete: Delete
+  create_post: Create a new post
+  back_to_list: Back to the post list
+  publish_comment: Publish comment
+  sign_in: Sign in
+  browse_app: Browse application
+  browse_admin: Browse backend
+  browse_api: Browse API
+  edit_contents: Edit contents
+delete_post_modal:
+  title: Are you sure you want to delete it?
+  body: This action cannot be undone.
+label:
+  delete_post: Delete post
+  delete_comment: Delete comment
+  cancel: Cancel
+  create_post: Create post
+  save_and_create_new: Save and create new
+  title: Title
+  keywords: Keywords
+  description: PageDescr.
+  rating: Rating
+  author: Author
+  author_email: Author email
+  email: Email
+  name: Realname
+  surname: Realsurname
+  username: Username(login name)
+  password: Password
+  password_repeat: Repeat password
+  role: Role
+  content: Content
+  preview: Preview
+  created_at: Created at
+  updated_at: Updated at
+  actions: Actions
+  is_activated: Activated?
+  post_state: Post active?
+  comment_state: Comment active?
+menu:
+  toggle_nav: Toggle navigation
+  choose_language: Choose language
+  post_list: Post list
+  back_to_blog: Back to blog
+  homepage: Blog
+  admin: Backend
+  logout: Logout
+  logout_successful: Logged out successful.
+  rss: Blog Posts RSS
+  search: Search
+post:
+  to_publish_a_comment: to publish a comment
+  num_comments: '%count% comment|%count% comments'
+  num_comments_newest: 'last %count% comments'
+  commented_on: commented on
+  no_comments: Be the first to comment on this post.
+  no_posts_found: No posts found.
+  inactive: Post inactive or deleted.
+  created_successfully: Post created successfully!
+  updated_successfully: Post updated successfully!
+  deleted_successfully: Post deleted successfully!
+  search_for: Search for(title/content)...
+  author_by: by
+  author_me: Me
+comment:
+  created_successfully: Comment created successfully!
+  deleted_successfully: Comment deleted successfully!
+user:
+  created_successfully: User created successfully!
+  updated_successfully: User updated successfully!
+  deleted_successfully: User deleted successfully!
+notification:
+  comment_created:
+    0: Your post received a comment!
+    description: Your post "%title%" has received a new comment. You can read the comment by following <a href="%link%">this link</a>
+  allowed_only_for_author: This allowed only by their authors.
+help:
+  login_users: Try either of the following users
+  registred_users: Already registred users
+  role_user: regular user
+  role_admin: administrator
+  reload_fixtures: 'If these users don''t work, reload application fixtures by running this command from the terminal:'
+  add_user: 'If you want to create new users, run this other command:'
+  browse_app: Enter the blog
+  browse_admin: Enter the admin part
+  login: Login
+  auth: Authorize
+  auth_required: Authentication required
+
+rss:
+  title: Test blog
+  description: Most recent posts created in the TEST blog

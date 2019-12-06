@@ -1,0 +1,22 @@
+validators_info: used only in entity as Assertion !
+post:
+  blank_preview: Give your post a preview text!
+  blank_content: Your post should have some content!
+  too_short_content: Post content is too short ({{ limit }} characters minimum)
+  too_long_content: Post content is too long ({{ limit }} characters maximum)
+  too_short_preview: Post preview is too short ({{ limit }} characters minimum)
+  too_long_preview: Post preview is too long ({{ limit }} characters maximum)
+  too_short_rate: Rating value is too small(min {{ limit }} inclusive).
+  too_long_rate: Rating value is too big(max {{ limit }} inclusive).
+comment:
+  blank: Please don't leave your comment blank!
+  too_short: Comment is too short ({{ limit }} characters minimum)
+  too_long: Comment is too long ({{ limit }} characters maximum)
+  is_spam: The content of this comment is considered spam.
+user:
+  blank_email: Email must be set
+  existing_email: Email already token, forgot pass?
+  wrong_email: Wrong email, please recheck
+  blank_username: Username(login) must be set
+  existing_username: Username(login) already token, forgot pass?
+  wrong_username: Username(login), please recheck

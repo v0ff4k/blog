@@ -1,0 +1,89 @@
+#blog   /blog
+blog_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Blog:index
+        _format: 'html'
+        page: 1
+
+blog_index_paginated:
+    path: /{page}
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Blog:index
+        _format: 'html'
+        page: 1
+    requirements:
+        page: \d+
+
+blog_post:
+    path: /post/{id}-{slug}
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Blog:show
+    requirements:
+        id: \d+
+
+blog_post_id:
+    path: /post/{id}
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Blog:show
+        slug: ""
+    requirements:
+        id: \d+
+
+blog_post_slug:
+    path: /post/{slug}
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Blog:show
+        id: 0
+    requirements:
+        slug: ^[a-z0-9\-_]+
+
+blog_post_edit:
+    path: /post/{id}/edit
+    methods: [GET, POST]
+    defaults:
+        _controller: AppBundle:Blog:edit
+    requirements:
+        id: \d+
+
+blog_post_create:
+    path: /create
+    methods: [GET, POST]
+    defaults:
+        _controller: AppBundle:Blog:create
+
+blog_post_delete:
+    path: /post/{id}/delete/{token}
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Blog:delete
+        objectString: 'post'
+    requirements:
+        id: \d+
+
+comment_new:
+    path: /comment/{slug}/new
+    methods: [POST]
+    defaults:
+        _controller: AppBundle:Blog:commentNew
+
+### same controller as 4 blog, make only inactive !
+comment_delete:
+    path: /comment/{id}/delete/{token}
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Blog:delete
+        objectString: 'comment'
+    requirements:
+        id: \d+
+
+blog_search:
+    path: /search
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Blog:search

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'blog_index' %}
+
+{%  block title %}Blog:: {{ 'label.content'|trans  }}{%  endblock%}
+
+{% block main %}
+
+    {% for post in posts %}
+        <article class="post">
+            <span class="media-meta pull-right">
+                        <i class="fa fa-calendar"></i>
+                                    {{ post.createdAt|localizeddate('long', 'medium', null, 'Asia/Bishkek') }}
+                    </span>
+            <h4>
+                <a href="{{ path('blog_post', {slug: post.slug, id: post.id}) }}">{{ post.title }}</a>
+            </h4>
+            <div class="row media card-deck mb-2">
+                <div class="media-left mb-2">
+                    <img class="media-photo thumbnail" src="{{ gravatar(post.author.email, '80', '', 'wavatar') }}" />
+                    <b>
+                    {%- if app.user.id is defined and app.user.id == post.author.id -%}{# if your post #}
+                        <a href="{{ path('security_edit') }}" title="{{ 'action.edit'|trans }}">
+                            {{ post.author.shortNameS }} <i class="fa fa-edit"></i>
+                        </a>
+                    {%- else -%}
+                        {{ post.author.shortNameS }}
+                    {%- endif -%}
+                    </b>
+
+                </div>
+                <div class="media-body mb-2">
+                    <div class="summary post-metadata">
+                        {{ post.preview|md2html }}
+                    </div>
+
+                    <div class="pull-left">
+                        {{ post.rating|ratingNew(5, "fa-2x") }}
+                        {% if commentsCount is not null and commentsCount[post.id] is defined %}
+                        <i class="fa fa-comments" aria-hidden="true"></i> {{ 'post.num_comments'|transchoice(commentsCount[post.id]) }}
+                        {% endif %}
+                    </div>
+
+                    <div class="pull-right" style="color: silver">
+                    {{ include('AppBundle:blog:_post_manage_buttons.html.twig', {post: post}) }}
+                    </div>
+                </div>
+
+            </div>
+            <hr />
+
+        </article>
+    {% else %}
+        <div class="well">{{ 'post.no_posts_found'|trans }}</div>
+    {% endfor %}
+
+    {% if posts.haveToPaginate %}
+        <div class="navigation text-center">
+            {{ pagerfanta(posts, 'twitter_bootstrap3_translated', {routeName: 'blog_index_paginated'}) }}
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block sidebar %}
+    {{ parent() }}
+
+    {{ include('AppBundle:blog:_rss.html.twig') }}
+{% endblock %}
+
+
+{% block keywords -%}
+    keys, for blog, blog posts, demo code
+{%- endblock %}
+{% block description -%}
+    description for demo blog, code demo blog, posts separated with pages.
+{%- endblock %}

@@ -1,0 +1,56 @@
+# Mac OSX
+.DS_STORE
+
+#vim temp files
+*~
+
+# Parameters
+/app/config/parameters.yml
+/app/config/parameters.ini
+
+# php unit and  phpcoding standarts
+/phpunit.xml
+/.php_cs
+
+# Cache and logs
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/data
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+
+/vendor/*
+!/vendor/.gitkeep
+
+# Build data
+/web/build/*
+!/web/build/.gitkeep
+!/web/build/manifest.js
+!/web/build/manifest.json
+!/web/build/css/.gitkeep
+!/web/build/css/app.css
+!/web/build/fonts/.gitkeep
+/web/build/fonts/glyphicons-*
+/web/build/images/glyphicons-*
+!/web/build/images/.gitkeep
+!/web/build/js/.gitkeep
+/web/bundles/*
+!/web/bundles/.gitkeep
+
+# Email spool folder, in web for external grabbers
+/var/spool/*
+!/var/spool/.gitkeep
+
+# Composer PHAR
+/composer.phar
+
+# ide
+/.idea
+

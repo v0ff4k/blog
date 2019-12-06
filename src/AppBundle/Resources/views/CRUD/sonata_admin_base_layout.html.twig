@@ -1,0 +1,58 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdn.ckeditor.com/4.11.3/standard/ckeditor.js" type="text/javascript"></script>
+{% endblock %}
+
+ {% block sonata_head_title %}this&nbsp;is&nbsp;aАdminkаa!{% endblock %}
+
+{% block sonata_sidebar_search %}
+    <ul class="sidebar-menu"><li><a href="{{ path('blog_index') }}"> &gt;&gt; to blog &gt;&gt; </a></li></ul>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <!-- some extra style for beautify ckeditor -->
+    <style>
+        .cke_skin_kama table{
+            width: inherit;
+            margin: inherit;
+        }
+        .cke_skin_kama input, .cke_skin_kama textarea, .cke_skin_kama select{
+            width: inherit;
+            -webkit-transition: none;
+            -moz-transition:  none;
+            -ms-transition:  none;
+            -o-transition:  none;
+            transition:  none;
+            -webkit-box-shadow:  none;
+            -moz-box-shadow:  none;
+            box-shadow:  none;
+        }
+        .cke_skin_kama label{
+            padding-top: inherit;
+            line-height: inherit;
+            float: inherit;
+            width: inherit;
+            color: inherit;
+            text-align: inherit;
+        }
+        .cke_skin_kama table td{
+            border-top: none;
+        }
+        .cke_skin_kama table th, .cke_skin_kama table td{
+            padding: 0;
+            line-height: inherit;
+        }
+        .cke_skin_kama select{
+            height: inherit;
+        }
+        .cke_skin_kama input, .cke_skin_kama textarea{
+            display: inherit;
+            border-radius: 0;
+            line-height: inherit;
+        }
+    </style>
+{% endblock stylesheets %}

@@ -1,0 +1,20 @@
+help_text:
+    user_not_found: We can not find any active user by username/email
+    bad_credentials: Password that you inputted are invalid, doble chech please.
+
+### help_text.{$tokenId}.message
+    apilogin:
+        fields: Input your login/email and correct password. All fields must be filled.
+        successful: You are successful logged, use token below to identificate yourself via cookie[token=xxx]/[header:x-api-key=xxx]/POST[token=xxx].
+    user_edit:
+        fields: Update your name/surname or password. if field NOT empty - they will be updated.
+        successful: Inputted data successful updated.
+    registration:
+        fields: Input your data for registration. All fields are must be.
+        successful: New user registred succesful, welcome %name%!
+
+problem:
+    validation_error: There was a validation error
+    field_send_error: There was a send data error
+    invalid_body_format: Invalid JSON format sent
+    invalid_field_please_check: Incorrect inputted fields, please check.

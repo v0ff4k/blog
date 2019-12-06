@@ -1,0 +1,125 @@
+note: ПРИМЕЧАНИЕ
+tip: СОВЕТ
+not_available: Недоступно
+http_error:
+  name: Ошибка %status_code%
+  description: Произошла неизвестная ошибка (HTTP %status_code%), которая помешала выполнить ваш запрос.
+  suggestion: Попробуйте загрузить эту страницу снова через несколько минут или <a href="%url%">вернитесь на главную страницу</a>.
+http_error_403:
+  description: У вас нет необходимых разрешений.
+  suggestion: Запросите доступ к этому ресурсу у вашего менеджера или системного администратора.
+http_error_404:
+  description: Мы не смогли найти запрашиваемую вами страницу.
+  suggestion: Проверьте корректность введенного URL или <a href="%url%">вернитесь на главную страницу</a>.
+http_error_500:
+  description: Произошла внутренняя ошибка сервера.
+  suggestion: Попробуйте загрузить эту страницу снова через несколько минут или <a href="%url%">вернитесь на главную страницу</a>.
+title:
+  homepage: Добро пожаловать в <strong>Demo CODE BLOG</strong> приложение
+  source_code: Исходный код, который использовался для отображения этой страницы
+  controller_code: Код контроллера
+  twig_template_code: Код шаблона Twig
+  login: Авторизация
+  post_list: Список записей
+  edit_post: 'Изменение записи %var%'
+  add_comment: Добавить комментарий
+  comment_error: Произошла ошибка во время публикации вашего комментария
+  post_new: Создание записи
+  register: Зарегестрироваться
+action:
+  show: Показать
+  show_post: Показать запись
+  edit: Изменить
+  edit_post: Изменить запись
+  save: Сохранить изменения
+  delete: Удалить
+  create_post: Создать запись
+  back_to_list: Назад к списку записей
+  publish_comment: Опубликовать комментарий
+  sign_in: Войти
+  browse_app: Просмотреть блог
+  browse_admin: Перейти в админку
+  browse_api: Перейти в API
+  edit_contents: Изменить содержание
+delete_post_modal:
+  title: Вы уверены, что хотите удалить это?
+  body: Это действие не может быть отменено.
+label:
+  delete_post: Удалить запись
+  delete_comment: Удалить коментарий
+  cancel: Отменить
+  create_post: Создать запись
+  save_and_create_new: Сохранить и создать новую
+  title: Название
+  keywords: Ключи
+  description: Описание
+  rating: Рейтинг
+  author: Автор
+  author_email: Email автора
+  email: Email
+  name: Имя
+  surname: Фамилия
+  username: Логин
+  password: Пароль
+  password_repeat: Повторите пароль
+  role: Роль
+  content: Содержание
+  preview: Краткое содержание
+  created_at: Создано
+  updated_at: Обновлено
+  actions: Действия
+  is_activated: Активен?
+  post_state: Активен пост?
+  comment_state: Коментарий включен?
+menu:
+  toggle_nav: Переключить навигацию
+  choose_language: Выбрать язык
+  post_list: Список записей
+  back_to_blog: Назад к блогу
+  homepage: Блог
+  admin: Панель управления
+  logout: Выйти
+  logout_successful: Вышли успешно.
+  rss: RSS Записей Блога
+  search: Поиск
+post:
+  to_publish_a_comment: для комментирования
+  num_comments: '%count% комментарий|%count% комментария|%count% комментариев'
+  num_comments_newest: 'последние %count% комментариев'
+  commented_on: прокомментировано
+  no_comments: Будьте первыми кто прокомментирует эту запись.
+  no_posts_found: Ни одной записи не найдено.
+  inactive: Запись неактивна или удалена.
+  created_successfully: Запись успешно создана!
+  updated_successfully: Запись успешно обновлена!
+  deleted_successfully: Запись успешно удалена!
+  search_for: Искать запись(заголовок/содержимое)...
+  author_by: ': '
+  author_me: я
+comment:
+  created_successfully: Коментарий успешно создан!
+  deleted_successfully: Коментарий успешно удален!
+user:
+  created_successfully: Пользователь успешно создан!
+  updated_successfully: Пользователь успешно обновлен!
+  deleted_successfully: Пользователь успешно удален!
+notification:
+  comment_created:
+    0: Ваша запись получила комментарий!
+    description: Ваша запись "%title%" получила новый комментарий. Вы можете прочесть этот коментарий, перейдя по <a href="%link%">этой ссылке</a>
+  allowed_only_for_author: Разрешено только авторам.
+help:
+  login_users: Используйте любого из следующих пользователей
+  registred_users: Уже зарегестрированные пользователи
+  role_user: обычный пользователь
+  role_admin: администратор
+  reload_fixtures: 'Если эти пользователи не работают, перезагрузите фикстуры приложения, выполнив в консоли следующую команду:'
+  add_user: 'Если вы хотите создать новых пользователей, воспользуйтесь следующей командой:'
+  browse_app: Войти в блог
+  browse_admin: Войти в админ панель
+  login: Войти
+  auth: Авторизоваться
+  auth_required: Необходимо авторизоваться
+rss:
+  title: Test блог
+  description: Самые последние записи, опубликованные в TEST блоге

@@ -1,0 +1,22 @@
+                        {% set delToken = csrf_token('delete') %}
+
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            admin: <a class="btn btn-sm btn-default" href="{{ path('admin_app_post_edit', {id: post.id}) }}">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            <big>{{ 'action.edit_post'|trans }}</big>
+                            </a><hr />
+                        {% endif %}
+                        {% if is_granted('edit', post) %}
+                            <a class="btn btn-sm btn-success" href="{{ path('blog_post_edit', {id: post.id}) }}">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                <big>{{ 'action.edit_post'|trans }}</big>
+                            </a>
+                        {% endif %}
+                        {% if is_granted('delete', post) %}
+                            &nbsp;/&nbsp;
+                            <a class="btn btn-sm btn-warning" href="{{ path('blog_post_delete', {id: post.id, token: delToken }) }}"
+                               onclick="return confirm('{{ 'label.delete_post'|trans }}: {{ post.title }}, {{ 'delete_post_modal.title'|trans }}')">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                                <big>{{ 'label.delete_post'|trans }}</big>
+                            </a>
+                        {% endif %}

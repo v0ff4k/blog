@@ -1,0 +1,21 @@
+<div class="row">
+    <div id="login-help" class="col-md-12">
+        <div id="login-users-help" class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    <span class="label label-info">{{ 'note'|trans }}</span>
+                    {{ 'help.reload_fixtures'|trans }}<br/>
+
+                    <code class="console">$ php bin/console doctrine:fixtures:load</code>
+                </p>
+
+                <p>
+                    <span class="label label-success">{{ 'tip'|trans }}</span>
+                    {{ 'help.add_user'|trans }}<br/>
+
+                    <code class="console">$ php bin/console app:add-user</code>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

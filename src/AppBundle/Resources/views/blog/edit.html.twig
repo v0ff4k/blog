@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'blog_post_edit' %}
+
+{% block main %}
+
+    <h2>{{ 'title.edit_post'|trans({'%var%': post.title}) }}</h2>
+
+    <p><br /></p>
+
+    {{ form_start(form, {attr: {'data-confirmation': 'true'} }) }}
+    {{ form_widget(form) }}
+
+
+        <a href="{{ path('blog_index') }}" class="btn btn-block btn-default">
+            <i class="fa fa-list-alt" aria-hidden="true"></i> {{ 'action.back_to_list'|trans }}
+        </a>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            <button type="submit" class="{{ button_css|default("btn btn-block btn-primary") }}">
+                <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans|default('label.create_post'|trans) }}
+            </button>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-lg btn-block btn-success" href="{{ path('blog_post_id', {id: post.id}) }}">
+                <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show_post'|trans }}
+            </a>
+        </div>
+        <div class="col-md-4">
+            {% set delToken = csrf_token('delete') %}
+            {% if is_granted('delete', post) %}
+                <a class="btn btn-lg btn-block btn-warning" href="{{ path('blog_post_delete', {id: post.id, token: delToken }) }}"
+                   onclick="return confirm('{{ 'label.delete_post'|trans }}: {{ post.title }}, {{ 'delete_post_modal.title'|trans }}')">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    &nbsp;{{ 'label.delete_post'|trans }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <br />
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block sidebar %}
+
+    <div class="row">
+        <div class="col-md-12">
+    {{ parent() }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ include('AppBundle:blog:_tinymce_javascript.html.twig') }}
+{% endblock %}

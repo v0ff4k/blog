@@ -1,0 +1,20 @@
+help_text:
+    user_not_found: Мы ненашли активного пользователя по введенному вами логину/почте
+    bad_credentials: Пароль не верен, пожалуйста проверьте.
+
+### help_text.{$tokenId}.message
+    apilogin:
+        fields: Введите данные для входа, логин/почта и пароль. Все поля необходимо заполнить.
+        successfuls: Можете использовать (token) в cookie[token=xxx]/[header:x-api-key=xxx]/POST[token=xxx] для идентификации себя.
+    user_edit:
+        fields: Введите новые данные для изменения. Если поле пустое, то старые данные останутся.
+        successful: Данные вашего акканта обновлены.
+    registration:
+        fields: Введите данные для регистрации. Все поля необходимо заполнить.
+        successful: Пользователь зарегестрирован успешно, добро пожаловать %name%!
+
+problem:
+    validation_error: Ошибка при проверки данных
+    field_send_error: Ошибка при отправке данных
+    invalid_body_format: Неверный JSON формат
+    invalid_field_please_check: Некорректные данные, пожалуйста проверьте.

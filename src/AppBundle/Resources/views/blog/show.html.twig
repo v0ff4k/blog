@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'blog_post_show' %}
+
+{%  block title %}Blog:: {{ post.firstWords(post.title, 5)  }}{%  endblock%}
+
+{% block main %}
+
+    <h2>{{ post.title }}</h2>
+
+    <div class="row">
+        <div class="col-md-12 text-justify">
+
+            <div class="visible-md visible-lg"><br /></div>
+
+            <p class="post-metadata">
+                <span class="metadata">
+                    <i class="fa fa-calendar"></i> {{ post.createdAt|localizeddate('long', 'medium', null, 'Asia/Bishkek') }}
+                </span>
+                <span class="metadata">
+                {% if app.user.id is defined and app.user.id == post.author.id %}{# if your post #}
+                    <a href="{{ path('security_edit') }}" title="{{ 'action.edit'|trans }}">
+                        <i class="fa fa-user"></i> {{ post.author.shortNameS }}
+                    </a>
+                    {% else %}
+                    <i class="fa fa-user"></i> {{ post.author.shortNameS }}
+                {% endif %}
+                </span>
+            </p>
+
+            <span class="metadata">
+                {{ post.rating|ratingNew(5) }}
+            </span>
+
+            <div class="pull-right hidden-xs col-xs-offset-1">
+
+                <img class="media-photo thumbnail" src="{{ gravatar(post.author.email, '80', '', 'wavatar') }}" />
+                {{ 'label.author'|trans }}{{ 'post.author_by'|trans }}
+                {% if app.user.id is defined and app.user.id == post.author.id %}{# if your post #}
+                    <a href="{{ path('security_edit') }}" title="{{ 'action.edit'|trans }}">
+                        {{ post.author.shortNameS }}
+                    </a>
+                {% else %}
+                    {{ post.author.shortNameS }}
+                {% endif %}
+
+            </div>
+
+            {{ post.content|md2html }}
+
+        </div>
+    </div>
+    <hr />
+
+    <div class="clearfix"></div>
+
+    {{ include('AppBundle:blog:_post_manage_buttons.html.twig', {post: post}) }}
+
+    <div id="post-add-comment" class="well">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{ render(controller('AppBundle:blog:commentForm', {'id': post.id})) }}
+        {% else %}
+
+                <a class="btn btn-success" href="{{ path('security_login') }}">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'action.sign_in'|trans }}
+                </a>
+                <a class="btn btn-success" href="{{ path('security_register') }}">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'title.register'|trans }}
+                </a>
+
+                {{ 'post.to_publish_a_comment'|trans }}
+
+        {% endif %}
+    </div>
+
+    <h3>
+        <i class="fa fa-comments" aria-hidden="true"></i>
+        {% if post.commentsCount > post.comments|length %}
+        {{  'post.num_comments_newest'|trans({ '%count%': post.comments|length }) }}
+        {% else %}
+        {{ 'post.num_comments'|transchoice(post.comments|length) }}
+        {% endif %}
+    </h3>
+
+    {% set delToken = csrf_token('delete') %}
+    {% for comment in post.comments %}
+        <div class="row post-comment">
+
+            <a name="comment_{{ comment.id }}"></a>
+
+            <div class="col-sm-3">
+                <img class="media-photo thumbnail hidden-xs" src="{{ gravatar(comment.author.email, '80', '', 'wavatar') }}" />
+                {% if app.user.id is defined and app.user.id == comment.author.id %}{# if your post #}
+                <a href="{{ path('security_edit') }}" title="{{ 'action.edit'|trans }}">
+                    <strong class="caption">{{ comment.author.shortNameS }}</strong>&nbsp;<i class="fa fa-edit"></i>
+                </a>
+                {% else %}
+                    <strong class="caption">{{ comment.author.shortNameS }}</strong>
+                {% endif %}<br />
+                <i class="text-gray">{{ comment.createdAt|localizeddate('medium', 'short', null, 'Asia/Bishkek') }}</i>
+            </div>
+            <div class="col-sm-9">
+                {{ comment.content|md2html }}
+            </div>
+
+            {% if is_granted('delete', comment) or is_granted('ROLE_SUPER_ADMIN') %}
+                <a class="btn btn-md btn-block btn-warning" href="{{ path('comment_delete', {id: comment.id, token: delToken }) }}"
+                   onclick="if(confirm('{{
+                   'label.delete_comment'|trans
+                   }}: {{
+                   'delete_post_modal.title'|trans
+                   }}')) { return true; }else{ event.stopPropagation(); event.preventDefault(); }"
+                >
+                    <i class="fa fa-times" aria-hidden="true"></i>&nbsp;{{ 'label.delete_comment'|trans }}
+                </a>
+            {% endif %}
+
+        </div>
+        <hr />
+    {% else %}
+        <div class="post-comment">
+            <p>{{ 'post.no_comments'|trans }}</p>
+        </div>
+    {% endfor %}
+    {% if post.commentsCount > post.comments|length %}
+        <br /><hr style="border-style: dashed;" />
+        &dbkarow; load {{ uHelper.numPerPage }}+ more comments. {{ post.commentsCount - post.comments|length }} remaining
+        add link- in <b>div</b>#main <b>div</b>.row post-comment + <b>hr</b> &dbkarow;
+        <hr style="border-style: dashed;" /><br />
+    {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+
+    {% if is_granted('edit', post) %}
+            <a class="btn btn-lg btn-block btn-success" href="{{ path('admin_app_post_edit', {id: post.id}) }}">
+                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit_post'|trans }}
+            </a>
+    {% endif %}
+
+    {{ parent() }}
+
+    {{ include('AppBundle:blog:_rss.html.twig') }}
+{% endblock %}
+
+{% block keywords -%}
+    {{ post.keywords }}
+{%- endblock %}
+{% block description -%}
+    {{ post.description }}
+{%- endblock %}

@@ -1,0 +1,41 @@
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    AppBundle\:
+        resource: '../../src/AppBundle/*'
+        exclude: '../../src/AppBundle/{Controller,Entity,Repository}'
+
+    AppBundle\Controller\:
+        resource: '../../src/AppBundle/Controller'
+        public: true
+        tags: ['controller.service_arguments']
+
+    AppBundle\Command\ListUsersCommand:
+        arguments:
+            $emailSender: '%app.notifications.email_sender%'
+
+###extend twig with function|filter etc.
+    AppBundle\Twig\AppExtension:
+        $locales: '%app_locales%'
+
+    Twig\Extensions\IntlExtension: ~
+
+###listeners
+    ### on new comment
+    AppBundle\EventListener\CommentNotificationSubscriber:
+        $sender: '%app.notifications.email_sender%'
+
+    AppBundle\EventListener\RedirectToPreferredLocaleSubscriber:
+        $locales: '%app_locales%'
+        $defaultLocale: '%locale%'
+
+
+#    slugger:
+#        alias: AppBundle\Utils\Slugger
+#        public: true
+
+

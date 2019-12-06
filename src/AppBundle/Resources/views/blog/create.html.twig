@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'blog_post_create' %}
+
+{% block main %}
+
+    <h2>{{ 'label.create_post'|trans }}</h2>
+
+    <p><br /></p>
+
+    {{ form_start(form, {attr: {'data-confirmation': 'true'} }) }}
+    {{ form_widget(form) }}
+
+    <button type="submit" class="{{ button_css|default("btn btn-primary") }}">
+        <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.create_post'|trans }}
+    </button>
+    <a href="{{ path('blog_index') }}" class="btn btn-link">
+        <i class="fa fa-list-alt" aria-hidden="true"></i> {{ 'action.back_to_list'|trans }}
+    </a>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ include('AppBundle:blog:_tinymce_javascript.html.twig') }}
+{% endblock %}

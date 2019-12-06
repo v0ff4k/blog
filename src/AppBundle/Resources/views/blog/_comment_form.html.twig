@@ -1,0 +1,22 @@
+{{ form_start(form, {method: 'POST', action: path('comment_new', {'slug': post.slug})}) }}
+    <fieldset onclick="$('.tempHidden > .hidden').removeClass('hidden');" class="tempHidden">
+        <legend>
+            <i class="fa fa-comment" aria-hidden="true"></i> {{ 'title.add_comment'|trans }}
+        </legend>
+
+        {# Render any global form error (e.g. when a constraint on a public getter method failed) #}
+        {{ form_errors(form) }}
+
+        <div class="form-group hidden {% if not form.content.vars.valid %}has-error{% endif %}">
+            {{ form_label(form.content, 'label.content') }}
+            {{ form_errors(form.content) }}
+            {{ form_widget(form.content, {attr: {rows: 7}}) }}
+        </div>
+
+        <div class="form-group hidden">
+            <button class="btn btn-block btn-primary pull-right" type="submit">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ 'action.publish_comment'|trans }}
+            </button>
+        </div>
+    </fieldset>
+{{ form_end(form) }}

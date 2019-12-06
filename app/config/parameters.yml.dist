@@ -1,0 +1,37 @@
+parameters:
+
+### default params
+    locale: en
+    app_locales: en|ru
+    app.notifications.email_sender: robot@blog-demo.loc
+# number per page on post/comment if any more than
+    num_per_page: 10
+
+
+    #env(SYMFONY_SECRET): 'secret_value_for_symfony_demo_application'
+    secret: abcdefghij1234567890abcdefghij123456789012
+
+    #env(LOG_URL): '%kernel.logs_dir%/%kernel.environment%.log'
+    monolog_log_path: '%kernel.logs_dir%/%kernel.environment%.log'
+
+### database part
+    #env(DATABASE_URL): 'mysql://root:rootpass@127.0.0.1:3306/demo_code_blog'
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: test_demo_code_blog
+    database_user: root
+    database_password: root
+
+### mail part
+    #env(MAILER_URL): 'smtp://localhost:25?encryption=&auth_mode='
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_port: 25
+    mailer_user: null
+    mailer_password: null
+    mailer_email_from:
+        robot@serv.com: '"Robot, serv.com"'
+    mailer_checkemail_from:
+        check@serv.com: '"Robot CHECKsender, serv.com"'
+    mailer_email_to: {  }

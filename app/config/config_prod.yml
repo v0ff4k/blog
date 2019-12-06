@@ -1,0 +1,47 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    cache:
+#        system: cache.adapter.memcached
+#        default_memcached_provider: 'memcached://localhost'
+        pools:
+            app.cache.customer:
+                adapter: cache.app
+
+doctrine:
+    orm:
+        default_entity_manager: default
+        entity_managers:
+            default:
+
+#The built-in types of caching drivers are:
+# array, apc, apcu, memcache, memcached, redis, wincache, zenddata and xcache.
+#There is a special type called service which lets you define the ID of your own caching service.
+#            result_cache_driver:
+#                type: memcache
+#                host: localhost
+#                port: 11211
+#                instance_class: Memcache
+#                class:          Doctrine\Common\Cache\MemcacheCache
+
+                metadata_cache_driver: array
+                query_cache_driver: array
+                result_cache_driver: array
+                connection: default
+                second_level_cache:
+                    enabled: true
+                    log_enabled: false
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  '%monolog_log_path%'
+            level: debug
+        console:
+            type:  console
