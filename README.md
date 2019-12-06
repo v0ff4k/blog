@@ -2,6 +2,15 @@ Demo Blog code testing
 ========================
 
 
+TODO
+------------
+ * test admin(lost translate)
+ * test accesses, check allow/forbid
+ * test all API via postman(60%).
+ * add js link to load more comments if length>10 
+ * write some test for "proff"
+
+
 Requirements
 ------------
 
@@ -11,13 +20,7 @@ Requirements
   * leftHand + rightHand + brain + lucky
 
 
-Installation(todo)
-------------
-
-* add js link to load more comments if length>10 
-
-
-#vars
+#vars(used locally)
 * site: blog-demo.loc
 * db: test_demo_code_blog
 * cache: prefix_seed: blog-code-demo
@@ -25,10 +28,10 @@ Installation(todo)
 commandline CLi
 ------------
 ```bash
-$ clone locally
-$ cd dir
-$ chown/chmod correct
-$ composer install
+$ clone with dot .
+$ if no dot after  `cd` in to your dir
+$ chown/chmod correct (below full info)
+$ composer install (with or without dev)
 $ composer update
 
 ### db manage ###
@@ -69,7 +72,7 @@ $ php bin/console cache:clear -e prod; sudo chown -R www-data:www-data var/
 # меняем права чтобы все было от www-data  или подходящего веб юзера
 $ sudo chown -R www-data:www-data ./
 
-#set permission
+# chmod correctly: set permission
 $ HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
 $ sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX var
 $ sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX var
@@ -89,12 +92,6 @@ $ ./vendor/bin/simple-phpunit tests/AppBundle/Utils/ValidatorTest.php
 # OPTIONAL install intl lib  for support   see https://symfony.com/doc/3.4/components/intl.html
 $ composer require symfony/intl
 
-# OPTIONAL enable SOAP pro client (or see https://github.com/phpro/soap-client)
-$ composer require tuscanicz/soap
-
-# and do NOT forget about  php 7.1 SOAP lib
-$ apt-get install -y php7.1-soap
-
 # portion send emails
 $ php bin/console swiftmailer:spool:send --env=dev --message-limit=10
 $ php bin/console swiftmailer:spool:send --env=prod --message-limit=10
@@ -106,24 +103,25 @@ $ php bin/console swiftmailer:email:send
 > **NOTE**
 >
 > any notes goes here )
+>
 > doctrine2 migrations
 > https://symfony.com/doc/master/bundles/DoctrineMigrationsBundle/index.html
 >
-> API'''\./
-> FOSRESTBundle
+> /API/ is with FOSRESTBundle
 > https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
 > nice example, not 100% !
 > https://www.cloudways.com/blog/rest-api-in-symfony-3-1/
+>
+> posts/comments/users generated from fixtures !!!!
+>
 
-
-MustHave
------
+MustHave:
+---------
 
 Реализовать Блог
 
  * Должна быть реализована авторизация и регистрация
- * Должны быть
-
+ 
 Посты:
    * тайтл
    * слаг
@@ -159,28 +157,22 @@ MustHave
 
 
 Роли:
-админ, 
+админ(и супер админ для админки), 
 пользователь. 
-Пользователи с ролью “админ” могут заходить в админ часть. 
-Авторизация происходит по email и пароль. 
-Пользователи не могут входить в админ панель, но могу авторизовываться на сайте. 
-После авторизации им доступна страница, где они могут добавить или удалить свои посты, а так же комментарии у других постов. 
-Удалять, редактировать чужие посты они не могут. 
-При удалении поста, пост должен быть просто не доступным ни для кого, кроме админа, пост должен попадать в “корзину”. 
-Удаление из базы данных постов, комментариев и пользователей доступно только админу, но сначала они должны попадать в “корзину” перед удалением. 
 
-Если пользователь находится в “корзине” он не может быть авторизован.
+Прочее:
+    * Пользователи с ролью “админ” могут заходить в админ часть. 
+    * Авторизация происходит по email и пароль. 
+    * Пользователи не могут входить в админ панель, но могу авторизовываться на сайте. 
+    * После авторизации им доступна страница, где они могут добавить или удалить свои посты, а так же комментарии у других постов. 
+    * Удалять, редактировать чужие посты они не могут. 
+    * При удалении поста, пост должен быть просто не доступным ни для кого, кроме админа, пост должен попадать в “корзину”. 
+    * Удаление из базы данных постов, комментариев и пользователей доступно только админу, но сначала они должны попадать в “корзину” перед удалением. 
+    * Если пользователь находится в “корзине” он не может быть авторизован.
 
- * Реализовать API для всего блога. 
+    * Реализовать API для всего блога. 
+    * Должен быть реализован идентичный функционал как на сайте. 
+    * Кроме получения постов, метаданные для поисковиков не должны быть в апи
+    * Использовать symfony3.4
 
-Должен быть реализован идентичный функционал как на сайте. 
-Кроме получения постов, метаданные для поисковиков не должны быть в апи
-
-
-Использовать symfony3.4
 ---------------
-
-todo:
- * test admin
- * access allow/forbod
- * test all API via postman.
