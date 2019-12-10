@@ -88,7 +88,7 @@ class PostRepository extends BaseRepository
             }
             $posts = $postsId;
         }
-
+        //@todo unwork with mysql  v5.7 and newer !
         if (is_array($posts) && !empty($posts)) {
             $query = $this->createQueryBuilder('p');
             $query
@@ -107,7 +107,7 @@ class PostRepository extends BaseRepository
             $result = $query->getQuery();
             $result->useQueryCache(true)->useResultCache(true, self::DAY_LIFETIME);
             $array = $result->getArrayResult();
-            foreach ($array as $i) {
+            foreach ($array as $i) {//todo WAT?
                 $key = $i['id'];
                 $val = $i['comments'];
                 $postWithCommentsArray[$key] = $val;
