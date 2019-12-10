@@ -45,7 +45,7 @@
         "symfony/security-guard": "^3.4",
         "symfony/serializer": "^3.4",
         "symfony/swiftmailer-bundle": "^2.3",
-        "symfony/symfony": "~3.4.0",
+        "symfony/symfony": "~3.4",
         "twig/extensions": "^1.5",
         "twig/twig": "^1.28 || ^2.0",
         "white-october/pagerfanta-bundle": "^1.0"
@@ -55,7 +55,7 @@
         "dama/doctrine-test-bundle"            : "^3.0",
         "sensio/generator-bundle"              : "^3.0",
         "friendsofphp/php-cs-fixer"            : "^2.0",
-        "symfony/phpunit-bridge"               : "^3.0"
+        "symfony/phpunit-bridge"               : "^3"
     },
     "scripts": {
         "symfony-scripts": [
