@@ -114,6 +114,16 @@ $ php bin/console swiftmailer:email:send
 >
 > posts/comments/users generated from fixtures !!!!
 >
+>
+> for new sql versions (//github.com/doctrine/orm/issues/5622)
+> /etc/mysql/my.cnf
+> add: 
+>  
+> [mysqld]
+> sql-mode=""
+> 
+
+
 
 MustHave:
 ---------
