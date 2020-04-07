@@ -31,7 +31,20 @@ sonata_admin:
         pager_results:              '@SonataAdmin/Pager/results.html.twig'
         layout:  AppBundle:CRUD:sonata_admin_base_layout.html.twig
         edit:   AppBundle:CRUD:base_edit.html.twig
-
+    dashboard:
+        groups: {  }
+        blocks:
+            -
+                position: center
+                settings: {  }
+                type: sonata.admin.block.admin_list
+                roles: {  }
+    options:
+        dropdown_number_groups_per_colums: 1
+    persist_filters: false
+    filter_persister: sonata.admin.filter_persister.session
+    show_mosaic_button: false
+    translate_group_label: false
 
 services:
 
