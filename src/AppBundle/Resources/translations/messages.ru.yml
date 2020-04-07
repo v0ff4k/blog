@@ -57,6 +57,8 @@ label:
   author: Автор
   author_email: Email автора
   email: Email
+  id: ID
+  login: Логин
   name: Имя
   surname: Фамилия
   username: Логин
@@ -123,3 +125,29 @@ help:
 rss:
   title: Test блог
   description: Самые последние записи, опубликованные в TEST блоге
+admin:
+  Users: Пользователи
+  Posts: Записи
+  Comments: Коментарии
+
+  password_fill: Пароль (не заполняйте, если не нужно обновить)
+  fullname: Полное имя
+  is_active: активный
+  is_active_q: "Активен ?"
+  user_is_active: "Пользователь активен"
+  user_is_active_q: Пользователь активен ?
+  token: Токен
+  user_s_token: Токен пользователя
+  select_role: Выбирите роль
+
+# дополнительный список для  sonata-admin
+User List: Список пользователей
+User Create: Создать нового пользователя
+Post List: Список записей
+Post Create: Создать новую запись
+Comment List: Список коментариев
+Comment Create: Создать коментарий
+
+superadmin: СуперАдмин
+admin: Админ
+user: Пользователь

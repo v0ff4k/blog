@@ -110,9 +110,9 @@ final class UserAdmin extends AbstractAdmin
 
         $passOptions = [
             'type' => 'password',
-            'label' => 'New password (empty filed means no changes)',
-            'first_options' => array('label' => 'label.password'),
-            'second_options' => array('label' => 'label.password_repeat'),
+            'label' => 'admin.new_password_fill',
+            //'first_options' => ['label' => 'admin.password_fill'],
+            'second_options' => ['label' => 'label.password_repeat'],
 //           'required' => false,
 //           'translation_domain' => 'messages',
             'invalid_message' => 'label.password.mismatch',
@@ -120,18 +120,21 @@ final class UserAdmin extends AbstractAdmin
 
         $recordId = $this->request->get($this->getIdParameter());
         $passOptions['required'] = (!empty($recordId)) ? false : true;
+        $passOptions['first_options']['label'] = (!empty($recordId))
+            ? 'admin.password_fill' // "live empty - means no changes"
+            : 'label.password'; // strictly must be filled!
 
         $formMapper
-            ->add('name', 'text', ['label' => 'Real Name'])
-            ->add('surname', 'text', ['label' => 'Real Surname'])
-            ->add('username', 'text', ['label' => 'Login'])
-            ->add('email', 'text', ['label' => 'E-mail'])
-            ->add('isActive', 'checkbox', ['label' => 'User is Active ?'])
+            ->add('name', 'text', ['label' => 'label.name'])
+            ->add('surname', 'text', ['label' => 'label.surname'])
+            ->add('username', 'text', ['label' => 'label.login'])
+            ->add('email', 'text', ['label' => 'label.email'])
+            ->add('isActive', 'checkbox', ['label' => 'admin.user_is_active_q'])
             ->add('plainPassword', 'repeated', $passOptions)
-            ->add('token', 'text', ['label' => 'User\'s token'])
+            ->add('token', 'text', ['label' => 'admin.user_s_token'])
             ->add('stringRoles', 'choice', [
                 'choices' => array_flip(User::getListRoles()),
-                'label' => 'Select User role'])
+                'label' => 'admin.select_role'])
         ;
     }
 
@@ -141,13 +144,13 @@ final class UserAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id', null, ['label' => 'user ID'])
-            ->add('name', null, ['label' => 'Real Name'])
-            ->add('surname', null, ['label' => 'Real Surname'])
-            ->add('username', null, ['label' => 'Login'])
-            ->add('email', null, ['label' => 'E-mail'])
-            ->add('isActive', null, ['label' => 'User is Active ?'])
-            ->add('token', null, ['label' => 'token'])
+            ->add('id', null, ['label' => 'label.id'])
+            ->add('name', null, ['label' => 'label.name'])
+            ->add('surname', null, ['label' => 'label.surname'])
+            ->add('username', null, ['label' => 'label.login'])
+            ->add('email', null, ['label' => 'label.email'])
+            ->add('isActive', null, ['label' => 'label.is_activated'])
+            ->add('token', null, ['label' => 'admin.token'])
 //            ->add('roles', 'doctrine_orm_choice', [], 'choice', [
 //                'choices' => $this->roles, 'label' => 'Role'
 //            ])
@@ -161,16 +164,18 @@ final class UserAdmin extends AbstractAdmin
     {
 
         $listMapper
-            ->addIdentifier('name', null, ['label' => 'Real Name'])
-            ->addIdentifier('surname', null, ['label' => 'Real Surname'])
-            ->addIdentifier('username', null, ['label' => 'Login'])
-            ->addIdentifier('email', null, ['label' => 'E-mail'])
-            ->addIdentifier('isActive', null, ['label' => 'Active?'])
+            ->addIdentifier('id', null, ['label' => 'label.id'])
+//            ->addIdentifier('name', null, ['label' => 'label.name'])
+//            ->addIdentifier('surname', null, ['label' => 'label.surname'])
+            ->addIdentifier('shortNameS', null, ['label' => 'admin.fullname'])
+            ->addIdentifier('username', null, ['label' => 'label.login'])
+            ->addIdentifier('email', null, ['label' => 'label.email'])
+            ->addIdentifier('isActive', null, ['label' => 'label.is_activated'])
             //->addIdentifier('password', null, ['label' => 'New pass'])
             //->addIdentifier('token', null, ['label' => 'User\'s token'])
             ->addIdentifier('stringRoles', 'choice', [
                 'choices' => User::getListRoles(),
-                'label' => 'Role.'])
+                'label' => 'label.role'])
         ;
     }
 }

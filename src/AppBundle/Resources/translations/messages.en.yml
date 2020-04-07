@@ -57,6 +57,8 @@ label:
   author: Author
   author_email: Author email
   email: Email
+  id: ID
+  login: Login
   name: Realname
   surname: Realsurname
   username: Username(login name)
@@ -124,3 +126,30 @@ help:
 rss:
   title: Test blog
   description: Most recent posts created in the TEST blog
+admin:
+  Users: Users
+  Posts: Posts
+  Comments: Comments
+
+  password_fill: New password (empty filed means no changes)
+  fullname: Name S.
+  is_active: active
+  is_active_q: "is Active ?"
+  user_is_active: "User is active"
+  user_is_active_q: Is user active ?
+  token: Token
+  user_s_token: Token of user
+  select_role: Select role
+
+# additional list for  sonata-admin
+User List: User list
+User Create: Create new user
+Post List: Post list
+Post Create: Create new post
+Comment List: Comment list
+Comment Create: Create comment
+
+# additional translate for role vars
+superadmin: superAdmin
+admin: Admin
+user: User
